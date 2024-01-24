@@ -1,6 +1,8 @@
 # MetaPerson - Photon Multiplayer Sample
 This sample demonstrates how to use [MetaPerson](https://metaperson.avatarsdk.com/) avatars in unity multiplayer applications using [Photon](https://www.photonengine.com/pun) package.
 
+![Photon Sample](./Documentation/Images/photon_sample.JPG "Photon Sample")
+
 ### Requirements
 - Unity 2021.3.19f1 or newer
 - [Photon PUN 2 Free](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922) or [Photon PUN 2+](https://assetstore.unity.com/packages/tools/network/photon-pun-2-120838) package.
