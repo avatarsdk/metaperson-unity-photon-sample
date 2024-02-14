@@ -18,10 +18,10 @@ namespace AvatarSDK.MetaPerson.Photon
 	{
 		public static List<string> avatarsLinks = new List<string>()
 		{
-			"https://metaperson.avatarsdk.com/avatars/66d88c5b-035e-4a9c-ba93-f85e96f24069/model.glb",
-			"https://metaperson.avatarsdk.com/avatars/1746df24-ae8a-4abe-856b-39fdf97ab35e/model.glb",
-			"https://metaperson.avatarsdk.com/avatars/65871fe1-7f17-431a-ba0d-9de3b6ecf4c0/model.glb",
-			"https://metaperson.avatarsdk.com/avatars/2d99c14e-a182-4c88-8ff4-39faad5855d0/model.glb"
+			"https://metaperson.avatarsdk.com/avatars/b255d298-7644-48ec-85ef-4a2200668458/model.glb",
+			"https://metaperson.avatarsdk.com/avatars/96efcff5-c9ca-4668-932f-f5af508567d5/model.glb",
+			"https://metaperson.avatarsdk.com/avatars/c3b14d5b-35d0-4910-beb5-cbab5193c2bc/model.glb",
+			"https://metaperson.avatarsdk.com/avatars/2354e546-24b8-4ec2-a5a0-81a11c281e69/model.glb"
 		};
 	}
 }
