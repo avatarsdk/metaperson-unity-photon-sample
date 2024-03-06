@@ -72,6 +72,7 @@ namespace AvatarSDK.MetaPerson.Photon
 				";
 
 			canvasWebViewPrefab.WebView.ExecuteJavaScript(javaScriptCode, OnJavaScriptExecuted);
+			canvasWebViewPrefab.WebView.SetFocused(true);
 		}
 
 		private void ConfigureJSApi()
