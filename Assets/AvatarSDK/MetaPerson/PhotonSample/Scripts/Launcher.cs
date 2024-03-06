@@ -12,6 +12,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace AvatarSDK.MetaPerson.Photon
 {
@@ -21,15 +23,17 @@ namespace AvatarSDK.MetaPerson.Photon
 
 		public GameObject controlPanel;
 
-		public GameObject progressLabel;
-
-		public Dropdown avatarsDropdown;
+		public GameObject connectingLabel;
 
 		public InputField nameInputField;
+
+		public List<AvatarPreview> avatars;
 
 		private string gameVersion = "1";
 
 		private bool isConnecting = false;
+
+		private int currentAvatarIdx = 0;
 
 		private void Start()
 		{
@@ -39,24 +43,10 @@ namespace AvatarSDK.MetaPerson.Photon
 				defaultName = PlayerPrefs.GetString(StringConstants.PlayerNamePrefKey);
 				nameInputField.text = defaultName;
 			}
-
 			PhotonNetwork.NickName = defaultName;
-		}
 
-		public void Connect()
-		{
-			progressLabel.SetActive(true);
-			controlPanel.SetActive(false);
-
-			if (PhotonNetwork.IsConnected)
-			{
-				PhotonNetwork.JoinRandomRoom();
-			}
-			else
-			{
-				isConnecting = PhotonNetwork.ConnectUsingSettings();
-				PhotonNetwork.GameVersion = gameVersion;
-			}
+			if (!PlayerPrefs.HasKey(StringConstants.PlayerCustomAvatarLinkPrefKey))
+				OnNextAvatarButtonClick();
 		}
 
 		public void SetPlayerName(string value)
@@ -68,6 +58,37 @@ namespace AvatarSDK.MetaPerson.Photon
 			}
 			PhotonNetwork.NickName = value;
 			PlayerPrefs.SetString(StringConstants.PlayerNamePrefKey, value);
+		}
+
+		public void OnPlayButtonClick()
+		{
+			connectingLabel.SetActive(true);
+			controlPanel.SetActive(false);
+
+			Connect();
+		}
+
+		public void OnNextAvatarButtonClick()
+		{
+			avatars[currentAvatarIdx].gameObject.SetActive(false);
+			currentAvatarIdx++;
+			if (currentAvatarIdx >= avatars.Count)
+				currentAvatarIdx = 0;
+			avatars[currentAvatarIdx].gameObject.SetActive(true);
+		}
+
+		public void OnPrevAvatarButtonClick()
+		{
+			avatars[currentAvatarIdx].gameObject.SetActive(false);
+			currentAvatarIdx--;
+			if (currentAvatarIdx < 0)
+				currentAvatarIdx = avatars.Count - 1;
+			avatars[currentAvatarIdx].gameObject.SetActive(true);
+		}
+
+		public void OpenAvatarSelectionScene()
+		{
+			SceneManager.LoadScene(StringConstants.AvatarSelectionSceneName);
 		}
 
 		public override void OnConnectedToMaster()
@@ -85,7 +106,7 @@ namespace AvatarSDK.MetaPerson.Photon
 		{
 			Debug.LogWarningFormat("Launcher: OnDisconnected, reason: {0}", cause);
 
-			progressLabel.SetActive(false);
+			connectingLabel.SetActive(false);
 			controlPanel.SetActive(true);
 
 			isConnecting = false;
@@ -101,9 +122,21 @@ namespace AvatarSDK.MetaPerson.Photon
 		public override void OnJoinedRoom()
 		{
 			Debug.Log("Launcher: OnJoinedRoom");
-
 			StoreSelectedAvatarLink();
 			PhotonNetwork.LoadLevel(StringConstants.GameSceneName);
+		}
+
+		private void Connect()
+		{
+			if (PhotonNetwork.IsConnected)
+			{
+				PhotonNetwork.JoinRandomRoom();
+			}
+			else
+			{
+				isConnecting = PhotonNetwork.ConnectUsingSettings();
+				PhotonNetwork.GameVersion = gameVersion;
+			}
 		}
 
 		private void StoreSelectedAvatarLink()
@@ -111,7 +144,7 @@ namespace AvatarSDK.MetaPerson.Photon
 			if (PhotonNetwork.InRoom)
 			{
 				ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
-				customProperties[StringConstants.AvatarLinkPropertyName] = AvatarsList.avatarsLinks[avatarsDropdown.value];
+				customProperties[StringConstants.AvatarLinkPropertyName] = avatars[currentAvatarIdx].modelUrl;
 				PhotonNetwork.SetPlayerCustomProperties(customProperties);
 			}
 		}

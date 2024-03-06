@@ -20,8 +20,14 @@ namespace AvatarSDK.MetaPerson.Photon
 
 		public static readonly string GameSceneName = "GameScene";
 
+		public static readonly string AvatarSelectionSceneName = "AvatarSelectionScene";
+
 		public static readonly string AvatarLinkPropertyName = "AvatarLink";
 
 		public static readonly string PlayerNamePrefKey = "PlayerName";
+
+		public static readonly string PlayerCustomAvatarCodePrefKey = "PlayerCustomAvatarCode";
+
+		public static readonly string PlayerCustomAvatarLinkPrefKey = "PlayerCustomAvatarLink";
 	}
 }

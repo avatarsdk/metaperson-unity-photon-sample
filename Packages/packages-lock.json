@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.cloud.gltfast": "6.0.1"
       },
-      "hash": "76970429e8d8e290a812f4dfab2e4e57e02659f3"
+      "hash": "2ce2f0c5436e9e65e201a3d0132713286c8d840f"
     },
     "com.unity.burst": {
       "version": "1.8.4",

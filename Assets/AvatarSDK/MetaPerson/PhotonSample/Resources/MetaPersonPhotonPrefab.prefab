@@ -1816,6 +1816,7 @@ MonoBehaviour:
   modelUri: 
   avatarObject: {fileID: 5242873563784328759}
   materialGenerator: {fileID: 8367408428531015048}
+  cacheModels: 1
 --- !u!114 &8367408428531015048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,9 +1909,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a17acc53192e3b4f8e545d526c5071e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 3
-  height: 2
-  centerOffset: {x: 0, y: 1.5, z: 0}
+  distance: 5
+  height: 2.5
+  centerOffset: {x: 0, y: 1.3, z: 0}
   followOnStart: 0
   smoothSpeed: 10
 --- !u!114 &7209986162944152394

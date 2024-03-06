@@ -310,4 +310,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 2179806264522572144}
   avatarLoadingText: {fileID: 7863759988787642085}
-  screenOffset: {x: 0, y: -10, z: 0}
+  screenOffset: {x: 0, y: 15, z: 0}
