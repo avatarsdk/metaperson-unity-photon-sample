@@ -35,7 +35,7 @@ It is a prefab that is instantiated for each player. This prefab is configured f
 The *AvatarSelectionScene* scene demonstrates how to integrate the [MetaPerson Creator](https://metaperson.avatarsdk.com/) web page into your application for creating new avatars or customizing already created.
 You can scroll through the sample avatars, find a slot with the custom avatar and click on the *Create My Avatar* button.
 
-The communication between [MetaPerson Creator](https://metaperson.avatarsdk.com/iframe.html) and Unity is carried out through the use of the [JS API](https://docs.metaperson.avatarsdk.com/js_api.html).
+The communication between [MetaPerson Creator](https://metaperson.avatarsdk.com/iframe.html) and Unity is carried out through the [JS API](https://docs.metaperson.avatarsdk.com/js_api.html).
 
 ![Create Avatar](./Documentation/Images/create_avatar.gif "Create Avatar")
 
