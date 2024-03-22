@@ -40,7 +40,7 @@ The communication between [MetaPerson Creator](https://metaperson.avatarsdk.com/
 ![Create Avatar](./Documentation/Images/create_avatar.gif "Create Avatar")
 
 ### AvatarSelectionScene Configuration
-1. Import [Vuplex plugin for Windows and macOS](https://store.vuplex.com/webview/windows-mac) into the project. This plugin is required to show [MetaPerson Creator](https://metaperson.avatarsdk.com/) web page inside a unity application.
+1. Import [Vuplex plugin for Windows and macOS](https://store.vuplex.com/webview/windows-mac) into the project. This plugin is required to show [MetaPerson Creator](https://metaperson.avatarsdk.com/) web page inside a unity application. We can provide you with a **20% discount** coupon for this plugin. Please contact us <support@avatarsdk.com> to get it.
 2. Find the *SceneHandler* object and provide your [Account Credentials](#account-credentials).
 ![Account Credentials](./Documentation/Images/account_credentials.jpg "Account Credentials")
 3. Add `Assets/AvatarSDK/MetaPerson/PhotonSample/Scenes/AvatarSelectionScene.unity` into Build Settings.
