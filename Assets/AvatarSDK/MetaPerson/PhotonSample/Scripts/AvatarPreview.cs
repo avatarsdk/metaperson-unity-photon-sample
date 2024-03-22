@@ -34,8 +34,6 @@ namespace AvatarSDK.MetaPerson.Photon
 
 		public Button customizeAvatarButton;
 
-		public RuntimeAnimatorController animatorController;
-
 		protected bool isAvatarLoaded = false;
 
 		protected float loadingProgress = 0;
@@ -49,10 +47,6 @@ namespace AvatarSDK.MetaPerson.Photon
 				{
 					if (gameObject.activeSelf)
 						progressSlider.gameObject.SetActive(false);
-
-					HumanoidAnimatorBuilder humanoidAnimatorBuilder = new HumanoidAnimatorBuilder();
-					humanoidAnimatorBuilder.AddHumanoidAnimator(metaPersonLoader.avatarObject);
-					humanoidAnimatorBuilder.SetAnimatorController(animatorController, metaPersonLoader.avatarObject);
 				}
 				else
 				{

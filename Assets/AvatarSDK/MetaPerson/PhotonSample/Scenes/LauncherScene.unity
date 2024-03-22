@@ -459,6 +459,10 @@ PrefabInstance:
       propertyPath: cacheModels
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5568330823641381, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
     - target: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
       propertyPath: m_Name
       value: MetaPersonModel
@@ -525,6 +529,10 @@ PrefabInstance:
       propertyPath: cacheModels
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5568330823641381, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
     - target: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
       propertyPath: m_Name
       value: MetaPersonModel
@@ -601,7 +609,6 @@ MonoBehaviour:
   playButton: {fileID: 1749217520}
   createAvatarButton: {fileID: 1107128040}
   customizeAvatarButton: {fileID: 1937082605}
-  animatorController: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
 --- !u!1 &823109307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1218,6 @@ MonoBehaviour:
   playButton: {fileID: 1749217520}
   createAvatarButton: {fileID: 1107128040}
   customizeAvatarButton: {fileID: 1937082605}
-  animatorController: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
 --- !u!1 &1107128038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1597,6 @@ MonoBehaviour:
   playButton: {fileID: 1749217520}
   createAvatarButton: {fileID: 1107128040}
   customizeAvatarButton: {fileID: 1937082605}
-  animatorController: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
 --- !u!1 &1398057682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
@@ -1862,6 +1867,10 @@ PrefabInstance:
       propertyPath: cacheModels
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5568330823641381, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
     - target: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
       propertyPath: m_Name
       value: MetaPersonModel
@@ -1944,6 +1953,10 @@ PrefabInstance:
       propertyPath: cacheModels
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5568330823641381, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
     - target: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
       propertyPath: m_Name
       value: MetaPersonModel
@@ -2714,7 +2727,6 @@ MonoBehaviour:
   playButton: {fileID: 1749217520}
   createAvatarButton: {fileID: 1107128040}
   customizeAvatarButton: {fileID: 1937082605}
-  animatorController: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
 --- !u!1001 &1873735228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2774,6 +2786,10 @@ PrefabInstance:
       propertyPath: cacheModels
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5568330823641381, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
     - target: {fileID: 5568330823641383, guid: 7c8f9054c4a36514a8e5e7657dbdd3eb, type: 3}
       propertyPath: m_Name
       value: MetaPersonModel
@@ -3184,7 +3200,6 @@ MonoBehaviour:
   playButton: {fileID: 1749217520}
   createAvatarButton: {fileID: 1107128040}
   customizeAvatarButton: {fileID: 1937082605}
-  animatorController: {fileID: 9100000, guid: 20a95633b66cbc24c9635223a675ae09, type: 2}
 --- !u!1 &2124080512
 GameObject:
   m_ObjectHideFlags: 0

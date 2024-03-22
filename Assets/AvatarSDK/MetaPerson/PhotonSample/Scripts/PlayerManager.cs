@@ -27,10 +27,6 @@ namespace AvatarSDK.MetaPerson.Photon
 
 		public MetaPersonLoader metaPersonLoader;
 
-		public Animator animator;
-
-		public GameObject defaultAvatar;
-
 		private PlayerUI playerUI;
 
 		private bool isDestroyed = false;
@@ -83,6 +79,9 @@ namespace AvatarSDK.MetaPerson.Photon
 		private async void StartAvatarLoading(string avatarLink)
 		{
 			Debug.LogFormat("PlayerManager: StartAvatarLoading - {0}", avatarLink);
+
+			metaPersonLoader.avatarObject = new GameObject("Loaded Avatar");
+			metaPersonLoader.avatarObject.SetActive(false);
 			bool isAvatarLoaded = await metaPersonLoader.LoadModelAsync(avatarLink);
 			if (isAvatarLoaded)
 			{
@@ -92,16 +91,7 @@ namespace AvatarSDK.MetaPerson.Photon
 					return;
 				}
 
-				float time = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-				int nameHash = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-
-				HumanoidAnimatorBuilder humanoidAnimatorBuilder = new HumanoidAnimatorBuilder();
-				animator.avatar = humanoidAnimatorBuilder.BuildHumanAvatar(metaPersonLoader.avatarObject);
-				DestroyImmediate(defaultAvatar);
-				animator.Rebind();
-
-				animator.Play(nameHash, 0, time);
-				metaPersonLoader.avatarObject.SetActive(true);
+				MetaPersonUtils.ReplaceAvatar(metaPersonLoader.avatarObject, gameObject);
 
 				if (playerUI != null)
 					playerUI.DisableLoadingText();
