@@ -24,3 +24,8 @@
 /Assembly-CSharp.csproj
 /Assembly-CSharp-Editor.csproj
 /.vsconfig
+/Fusion.Menu.csproj
+/Fusion.Menu.Editor.csproj
+/Fusion.Unity.csproj
+/Fusion.Unity.Editor.csproj
+/Unity.Fusion.CodeGen.csproj

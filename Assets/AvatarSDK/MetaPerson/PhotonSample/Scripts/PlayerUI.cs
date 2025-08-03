@@ -11,10 +11,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Fusion;
 
 namespace AvatarSDK.MetaPerson.Photon
 {
-	public class PlayerUI : MonoBehaviour
+	public class PlayerUI : NetworkBehaviour
 	{
 		public Text playerNameText;
 
@@ -22,31 +23,46 @@ namespace AvatarSDK.MetaPerson.Photon
 
 		public Vector3 screenOffset = new Vector3(0f, 30f, 0f);
 
-		private PlayerManager target;
+		public GameObject target;
 
-		private float characterControllerHeight = 0f;
+		public  float avatarHeight = 2.0f;
+		
 		private Transform targetTransform;
 		private Renderer targetRenderer;
 		private CanvasGroup canvasGroup;
 		private Vector3 targetPosition;
 
-		void Update()
-		{
-			if (target == null)
-			{
-				Destroy(this.gameObject);
-				return;
-			}
-		}
+		[Networked, Capacity(32)]
+		public string PlayerName { get; set; }
 
-		void Awake()
+		private void Start()
 		{
 			transform.SetParent(GameObject.Find("Canvas").GetComponent<Transform>(), false);
 			canvasGroup = this.GetComponent<CanvasGroup>();
+
+			if (playerNameText != null)
+			{
+				playerNameText.text = PlayerName;
+			}
+
+			targetTransform = target.GetComponent<Transform>();
+			targetRenderer = target.GetComponent<Renderer>();
+
+			MetaPersonLoaderNetwork metaPersonLoaderNetwork = target.GetComponent<MetaPersonLoaderNetwork>();
+			if (metaPersonLoaderNetwork != null)
+				metaPersonLoaderNetwork.modelLoaded += DisableLoadingText;
+			else
+				DisableLoadingText();
 		}
 
 		void LateUpdate()
 		{
+			if (target == null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			if (targetRenderer != null)
 			{
 				canvasGroup.alpha = targetRenderer.isVisible ? 1f : 0f;
@@ -55,29 +71,12 @@ namespace AvatarSDK.MetaPerson.Photon
 			if (targetTransform != null)
 			{
 				targetPosition = targetTransform.position;
-				targetPosition.y += characterControllerHeight;
-				this.transform.position = Camera.main.WorldToScreenPoint(targetPosition) + screenOffset;
+				targetPosition.y += avatarHeight;
+				transform.position = Camera.main.WorldToScreenPoint(targetPosition) + screenOffset;
 			}
 		}
 
-		public void SetTarget(PlayerManager target)
-		{
-			this.target = target;
-			if (playerNameText != null)
-			{
-				playerNameText.text = target.photonView.Owner.NickName;
-			}
-
-			targetTransform = this.target.GetComponent<Transform>();
-			targetRenderer = this.target.GetComponent<Renderer>();
-			CharacterController characterController = target.GetComponent<CharacterController>();
-			if (characterController != null)
-			{
-				characterControllerHeight = characterController.height;
-			}
-		}
-
-		public void DisableLoadingText()
+		private void DisableLoadingText()
 		{
 			avatarLoadingText.gameObject.SetActive(false);
 		}
