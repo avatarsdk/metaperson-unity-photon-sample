@@ -10,7 +10,7 @@ This sample demonstrates how to use [MetaPerson](https://metaperson.avatarsdk.co
 ## Getting Started
 1. Clone this repository to your computer
 2. Open the project in Unity 2021.3.19f1 or newer.
-3. Import [Photon Fusion SDK 2.0](https://doc.photonengine.com/fusion/current/getting-started/sdk-download) package and configure Fusion App Id in Photon Hub window.
+3. Import [Photon Fusion SDK 2.0](https://doc.photonengine.com/fusion/current/getting-started/sdk-download) package and configure **Fusion App Id** in **Photon Hub** window.
 4. Add the following scenes into Build Settings and build a *Windows, Mac, Linux* app.
 - `Assets/AvatarSDK/MetaPerson/PhotonSample/Scenes/LauncherScene.unity`
 - `Assets/AvatarSDK/MetaPerson/PhotonSample/Scenes/GameScene.unity`
@@ -24,7 +24,7 @@ The **LauncherScene** is the initial scene where users:
 - Enter their username.
 - Select an avatar.
 
-The following data is stored in **PlayerPrefs(* and passed to the **GameScene**:
+The following data is stored in **PlayerPrefs** and passed to the **GameScene**:
 - **Username** – The entered player name.
 - **Avatar GLB File** – A link to the selected avatar's GLB model.
 - **Avatar Gender** – The gender of the chosen avatar.
@@ -48,7 +48,6 @@ Spawns player avatars in multiplayer sessions.
   - Model URL
   - Gender
   - Display name
-- Random circular spawn pattern (2m radius)
 
 ### MetaPerson Photon Prefab
 An object instantiated for each player, with separate prefabs for male and female avatars.
