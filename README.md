@@ -1,16 +1,16 @@
 # MetaPerson - Photon Multiplayer Sample
-This sample demonstrates how to use [MetaPerson](https://metaperson.avatarsdk.com/) avatars in unity multiplayer applications using [Photon](https://www.photonengine.com/pun) package.
+This sample demonstrates how to use [MetaPerson](https://metaperson.avatarsdk.com/) avatars in unity multiplayer applications using [Photon Fusion](https://www.photonengine.com/fusion) package.
 
 ![Photon Sample](./Documentation/Images/photon_sample.JPG "Photon Sample")
 
 ### Requirements
 - Unity 2021.3.19f1 or newer
-- [Photon PUN 2 Free](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922) or [Photon PUN 2+](https://assetstore.unity.com/packages/tools/network/photon-pun-2-120838) package.
+- [Photon Fusion SDK 2.0](https://www.photonengine.com/sdks#fusion)
 
 ## Getting Started
 1. Clone this repository to your computer
 2. Open the project in Unity 2021.3.19f1 or newer.
-3. Import [Photon PUN 2 Free](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922) or [Photon PUN 2+](https://assetstore.unity.com/packages/tools/network/photon-pun-2-120838) package and configure App PUN settings.
+3. Import [Photon Fusion SDK 2.0](https://doc.photonengine.com/fusion/current/getting-started/sdk-download) package and configure Fusion App Id in Photon Hub window.
 4. Add the following scenes into Build Settings and build a *Windows, Mac, Linux* app.
 - `Assets/AvatarSDK/MetaPerson/PhotonSample/Scenes/LauncherScene.unity`
 - `Assets/AvatarSDK/MetaPerson/PhotonSample/Scenes/GameScene.unity`
@@ -20,16 +20,89 @@ This sample demonstrates how to use [MetaPerson](https://metaperson.avatarsdk.co
 ## How It Works
 
 ### LauncherScene
-This scene represents a *Lobby*. Here you enter your user name and select an avatar.
-- User name is stored in the *PlayerPrefs*.
-- There are the sample avatars that are loaded by the link to a *GLB* file. 
-- When you click on a *Play* button, the link to the selected avatar is stored in custom properties (`PhotonNetwork.SetPlayerCustomProperties`) and is used by [PlayerManager](./Assets/AvatarSDK/MetaPerson/PhotonSample/Scripts/PlayerManager.cs) in *GameScene*.
+The **LauncherScene** is the initial scene where users:
+- Enter their username.
+- Select an avatar.
+
+The following data is stored in **PlayerPrefs(* and passed to the **GameScene**:
+- **Username** – The entered player name.
+- **Avatar GLB File** – A link to the selected avatar's GLB model.
+- **Avatar Gender** – The gender of the chosen avatar.
 
 ### GameScene
-It is a room where avatars of the connected users are shown. Once a new user enters the room, its avatar is being loaded from the provided link. The [MetaPerson Loader](https://github.com/avatarsdk/metaperson-loader-unity) package is used to load an avatar in *GLB* format at runtime.
+This scene includes the core multiplayer setup with the following key objects:
 
-### MetaPersonPhotonPrefab
-It is a prefab that is instantiated for each player. This prefab is configured for template avatar model that is stored in assets. Initially the template model is shown for each player. Once the avatar model from the passed link is loaded, it replaces the template model.
+1. Prototype Network Start
+- Operates in **Shared Authority** mode, enabling collaborative interactions between connected players.
+- Handles initial network synchronization and session management.
+![Prototype Network Start](./Documentation/Images/prototype_network_start.jpg "Prototype Network Start")
+
+2. Prototype Runner
+- Contains a **Player Spawner** component responsible for instantiating **MetaPerson prefabs** upon player connection.
+- The spawned prefabs are configured with the avatar data (username, GLB model, gender) passed from **LauncherScene**.
+
+### PlayerSpawner
+Spawns player avatars in multiplayer sessions.
+- Instantiates gender-specific prefabs (male/female)
+- Loads avatar data from `PlayerPrefs`:
+  - Model URL
+  - Gender
+  - Display name
+- Random circular spawn pattern (2m radius)
+
+### MetaPerson Photon Prefab
+An object instantiated for each player, with separate prefabs for male and female avatars.
+![MetaPerson Photon Prefab](./Documentation/Images/metaperson_prefab.jpg "MetaPerson Photon Prefab")
+- **Meta Person Loader**: Uses the [MetaPerson Loader](https://github.com/avatarsdk/metaperson-loader-unity) package to load GLB models.
+- **Meta Person Material Generator**: Provides material templates for avatar customization.
+- **Network Object**: Gives the object a network identity for multiplayer synchronization.
+- **Network Transform**: Synchronizes the object's position across all connected clients.
+- **MetaPerson Loader Network**: Extends avatar loading functionality for multiplayer environments.
+- **Player Movemet Controller**: Handles movement input and animation synchronization.
+- **Camera Controller**: Adjusts the camera position based on the avatar's movement.
+- **Animator**: Controls the avatar's animation states and transitions.
+
+### MetaPerson Loader Network
+
+Initially a template model is shown on the scene. This component downloads an avatar model from the provided URL, loads it into the scene, and replaces the template avatar.
+
+- The GLB model link is set via the `AvatarURL` network-synchronized property.
+
+```cs
+[Networked, Capacity(128)]
+public string AvatarURL { get; set; }
+```
+
+- `MetaPerson Loader` is used to to fetch and prepare the GLB model.
+
+```cs
+GameObject loadedAvatarObject = new GameObject("Loaded Avatar");
+metaPersonLoader.avatarObject = loadedAvatarObject;
+metaPersonLoader.avatarObject.SetActive(false);
+bool isAvatarLoaded = await metaPersonLoader.LoadModelAsync(avatarLink);
+```
+
+- Once the avatar model is ready, swaps the template with the loaded model.
+
+```cs
+MetaPersonUtils.ReplaceAvatar(metaPersonLoader.avatarObject, gameObject);
+```
+
+### Player Movement Controller
+
+Controls character movement and animation synchronization.
+
+- Press **Up Arrow** or **W** to move forward. 
+- Automatically switches from **Idle** to **Walk** animation.
+- Animation state is synchronized across players via the `AnimationStateName` networked property.
+
+### Camera Controller
+
+Makes the camera follow the player's character with mouse-controlled rotation.
+
+- Automatically follows the player character.
+- **Left mouse button + drag** rotates the camera.
+
 
 ## Integration MetaPerson Creator Into App
 The *AvatarSelectionScene* scene demonstrates how to integrate the [MetaPerson Creator](https://metaperson.avatarsdk.com/) web page into your application for creating new avatars or customizing already created.
